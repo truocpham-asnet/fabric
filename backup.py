@@ -18,9 +18,12 @@ def backup_plugin():
 @task(default=True)
 def backup(server):
 
-  backup_folder_name = '%s-%s' % (server, datetime.date.today())
-
-  print 'Backuping... %s - database name - %s' % (server, backup_folder_name)
+  if not server:
+    return 1
+  else:
+    backup_folder_name = '%s-%s' % (server, datetime.date.today())
+    print 'Backuping... %s - database name - %s' % (server, backup_folder_name)
+    return 0
 
 @task
 def backup_two(server, db):
